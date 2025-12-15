@@ -1,7 +1,7 @@
 <?php
 $footerLinksRaw = $this->themeSetting('footer_links');
 
-$footerLinks = [];
+$footerLinks = ["links" => [], "partners" => []];
 
 if ($footerLinksRaw) {
     $lines = preg_split('/\r\n|\r|\n/', $footerLinksRaw);
@@ -12,15 +12,15 @@ if ($footerLinksRaw) {
         if (count($parts) === 3) {
             [$label, $url, $type] = $parts;
             if ($type === "partner-link") {
-                $partners[] = [
+                $footerLinks["partners"][] = [
                     'label' => $label,
                     'url'   => $url,
                 ];
             } else {
-                $footerLinks[] = [
+                $footerLinks["links"][] = [
                     'label' => $label,
                     'url'   => $url,
-                    'type'   => $type,
+                    'type'  => $type,
                 ];
             }
             
@@ -31,14 +31,14 @@ if ($footerLinksRaw) {
 if (!empty($footerLinks)): ?>
     <div class="footer-content">
         <div class="link-grid">
-            <?php foreach ($footerLinks as $link): ?>
+            <?php foreach ($footerLinks["links"] as $link): ?>
             <div>
                 <a class="icon <?= $this->escapeHtml($link['type']) ?>" href="<?= $this->escapeHtmlAttr($link['url']) ?>"><?= $this->escapeHtml($link['label']) ?></a>
             </div>
             <?php endforeach; ?>
         </div>
         <div class="partners">
-        <?php foreach ($partners as $partner): ?>
+        <?php foreach ($footerLinks["partners"] as $partner): ?>
             <a href="<?= $this->escapeHtmlAttr($partner['url']) ?>"><?= $this->escapeHtml($partner['label']) ?></a>
         <?php endforeach; ?>
         </div>
