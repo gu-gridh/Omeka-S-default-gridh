@@ -1,0 +1,46 @@
+<?php
+$footerLinksRaw = $this->themeSetting('footer_links');
+
+$footerLinks = [];
+
+if ($footerLinksRaw) {
+    $lines = preg_split('/\r\n|\r|\n/', $footerLinksRaw);
+
+    foreach ($lines as $line) {
+        $parts = array_map('trim', explode('|', $line, 3));
+
+        if (count($parts) === 3) {
+            [$label, $url, $type] = $parts;
+            if ($type === "partner-link") {
+                $partners[] = [
+                    'label' => $label,
+                    'url'   => $url,
+                ];
+            } else {
+                $footerLinks[] = [
+                    'label' => $label,
+                    'url'   => $url,
+                    'type'   => $type,
+                ];
+            }
+            
+        }
+    }
+}
+
+if (!empty($footerLinks)): ?>
+    <div class="footer-content">
+        <div class="link-grid">
+            <?php foreach ($footerLinks as $link): ?>
+            <div>
+                <a class="icon <?= $this->escapeHtml($link['type']) ?>" href="<?= $this->escapeHtmlAttr($link['url']) ?>"><?= $this->escapeHtml($link['label']) ?></a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="partners">
+        <?php foreach ($partners as $partner): ?>
+            <a href="<?= $this->escapeHtmlAttr($partner['url']) ?>"><?= $this->escapeHtml($partner['label']) ?></a>
+        <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
