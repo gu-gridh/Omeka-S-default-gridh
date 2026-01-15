@@ -45,20 +45,21 @@ $userBar = $this->userBar();
                 </a>
             </h1>
             <nav id="top-nav">
-            <button type="button" id="mobile-nav-toggle" aria-expanded="false" aria-label="<?php echo $translate('Toggle Menu'); ?>" title="<?php echo $translate('Toggle Menu'); ?>" aria-expanded="false"></button>
-            <?php
-            echo $site->publicNav()->menu()->renderMenu(null, [
-                'maxDepth' => $this->themeSetting('nav_depth') - 1,
-                'id' => 'top-nav-contents'
-            ]);
-            ?>
+                <button type="button" id="mobile-nav-toggle" aria-expanded="false" aria-label="<?php echo $translate('Toggle Menu'); ?>" title="<?php echo $translate('Toggle Menu'); ?>" aria-expanded="false"></button>
+                <?php
+                echo $site->publicNav()->menu()->renderMenu(null, [
+                    'maxDepth' => $this->themeSetting('nav_depth') - 1,
+                    'id' => 'top-nav-contents'
+                ]);
+                ?>
+                <?= $this->getHelperPluginManager()->has('languageSwitcher')
+                ? $this->languageSwitcher(['locale_as_code' => true]) : '' ?>
             </nav>
             <?php if ($banner): ?>
             <div class="banner">
                 <img role="presentation" src="<?php echo $this->themeSettingAssetUrl('banner'); ?>" title="Banner">
             </div>
             <?php endif; ?>
-
         </header>
         <div id="content" role="main">
             <?php echo $this->content; ?>
