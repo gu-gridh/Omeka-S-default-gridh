@@ -31,21 +31,25 @@ foreach ($values as $term => $propertyData):
     } else {   
         $propertyTerm = null;
     }
+    $parts = [];
 ?>
     <span class="annotation-prop">
-        <?php if ($propertyLabel == 'sidor'): ?>
-        <?php echo '(s. ' ?>
-        <?php elseif ($propertyLabel == 'pages'): ?>
-        <?php echo '(p. ' ?>
-        <?php elseif ($propertyLabel == 'Beskrivning' || $propertyLabel == 'Description'): ?>
-        <?php else: ?> 
-        <?php echo $escape($propertyLabel); ?>
-        <?php endif; ?>
+        <?php if ($propertyLabel == 'sidor'):
+            $label = '(s. ';
+            elseif ($propertyLabel == 'pages'):
+            $label = '(p. ';
+            elseif ($property->label() == 'description'):
+            $label = '';    
+            else:
+            $label = $escape($propertyLabel);
+            endif;
+        ?>
         <?php if ($propertyTerm !== null): ?> 
         <span class="field-term">(<?php echo $escape($propertyTerm); ?>)</span>
         <?php endif; ?>
         <?php foreach ($propertyValues as $value): ?>
-        <?php  
+        <?php
+        ob_start();
         $valueType = $value->type();
         $valueLang = $value->lang();
         $class = ['value'];
@@ -67,9 +71,14 @@ foreach ($values as $term => $propertyData):
          <?php endif; ?>
          <?php $this->trigger('view.show.value', ['value' => $value]); ?>
         <?php if ($property->label() == 'pages'): ?>
+          <?php echo ',' ?>
+        <?php endif; 
+        $parts[] = trim(ob_get_clean()); ?>
+        <?php endforeach; ?>
+        <?php echo implode(', ', $parts); ?>
+        <?php if ($property->label() == 'pages'): ?>
           <?php echo ')' ?>
         <?php endif; ?>
-        <?php endforeach; ?>
     </span>
 <?php endforeach; ?>
 <?php endif; ?>
