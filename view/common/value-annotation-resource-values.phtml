@@ -38,13 +38,13 @@ foreach ($values as $term => $propertyData):
             $label = '(s. ';
             elseif ($propertyLabel == 'pages'):
             $label = '(p. ';
-            elseif ($property->label() == 'description'):
-            $label = '';    
+            elseif ($property->label() == 'Description'):
+            $label = '';
             else:
             $label = $escape($propertyLabel);
             endif;
         ?>
-        <?php if ($propertyTerm !== null): ?> 
+        <?php if ($propertyTerm !== null): ?>
         <span class="field-term">(<?php echo $escape($propertyTerm); ?>)</span>
         <?php endif; ?>
         <?php foreach ($propertyValues as $value): ?>
@@ -53,15 +53,15 @@ foreach ($values as $term => $propertyData):
         $valueType = $value->type();
         $valueLang = $value->lang();
         $class = ['value'];
-        if ('resource' == $valueType || strpos($valueType, 'resource') !== false) {
+        if ('resource' == $valueType || strpos($valueType,'resource') !== false) {
             $class[] = 'resource';  
             $class[] = $escape($value->valueResource()->resourceName());
         } elseif ('uri' == $valueType) {
             $class[] = 'uri';
         } else {  
-            $class[] = $escape(str_replace(['_', ':'], '-', $valueType));
-        }  
-        ?>  
+            $class[] = $escape(str_replace(['_', ':'], '-',$valueType));
+        }
+        ?>
         <?php if ($showLocale && $valueLang): ?>
             <span class="language"><?php echo $valueLang; ?></span>
         <?php endif; ?>
@@ -70,10 +70,7 @@ foreach ($values as $term => $propertyData):
             <span class="o-icon-private" role="img" title="<?php echo $this->escapeHtml($translate('Private')); ?>" aria-label="<?php echo $this->escapeHtml($translate('Private')); ?>"></span>
          <?php endif; ?>
          <?php $this->trigger('view.show.value', ['value' => $value]); ?>
-        <?php if ($property->label() == 'pages'): ?>
-          <?php echo ',' ?>
-        <?php endif; 
-        $parts[] = trim(ob_get_clean()); ?>
+        <?php $parts[] = trim(ob_get_clean()); ?>
         <?php endforeach; ?>
         <?php echo implode(', ', $parts); ?>
         <?php if ($property->label() == 'pages'): ?>
