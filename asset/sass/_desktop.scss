@@ -1,3 +1,6 @@
+@use "base" as *;
+
+@media screen and (min-width:800px) {
 #content {
     padding: 0 (2 * $spacing-l) $spacing-l;
 }
@@ -379,3 +382,4 @@ ul.preview.resource-list li:first-of-type {
 }
 
 /* @end */
+}

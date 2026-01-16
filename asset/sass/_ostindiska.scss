@@ -1,0 +1,166 @@
+:root {
+  --font-color: #0b2e97;
+  --background-color: #fff;
+  --footer-color: #222;
+  --grey: #ccc;
+}
+
+body {
+  font-family: "Barlow Condensed", "Segoe UI", Arial, system-ui, -apple-system, sans-serif;
+  font-size: 20px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+div#content {
+  min-width: 75%;
+}
+
+.block a {
+  color: #0066cc !important;
+  text-decoration: none;
+  &:visited {
+    color: #551a8b !important;
+  }
+  &:hover {
+    color: #cc5500 !important;
+  }
+  &:active {
+    color: #e62e00 !important;
+  }
+}
+
+.block p {
+  font-size: 20px;
+}
+
+.block.links ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+  margin: 2rem;
+}
+
+ul.list-links li {
+  background-color: #007a76;
+  padding: 0.5rem;
+}
+
+ul.list-links li a {
+  color: #fff !important;
+  &:visited {
+    color: #fff !important;
+  }
+}
+
+footer {
+  display: block;
+  background-color: var(--footer-color);
+  color: var(--background-color);
+  line-height: 1;
+  min-height: 82px;
+  width: 100%;
+  min-width: 100%;
+  padding: 1rem;
+}
+    
+div.footer-content {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.4;
+  font-weight: 200
+}
+    
+div.link-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-rows: auto;
+  grid-template-rows: repeat(2, auto);
+  gap: .3rem 1rem
+}
+    
+footer a,
+footer a:visited {
+  font-family: "Barlow Condensed", "Segoe UI", Arial, system-ui, -apple-system, sans-serif;
+  color: var(--background-color);
+  padding: 0 .5em;
+  margin-left: 0;
+  text-decoration: none
+}
+    
+footer a:hover {
+  opacity: .8
+}
+    
+div.partners {
+  font-weight: 100;
+  font-size: 30px;
+  align-content: center
+}
+    
+div.partners a:not(:first-of-type) {
+  border-left: 1px solid var(--grey);
+}
+    
+footer a.icon {
+  background-size: 18px;
+  background-position: 0 50%;
+  padding-left: 25px
+}
+    
+footer .download-link {
+  background: url("https://data.dh.gu.se/ui-icons/download_white_circle.png") no-repeat center
+}
+    
+footer .site-link {
+  background: url("https://data.dh.gu.se/ui-icons/arrow_link_white_circle.png") no-repeat center
+}
+
+header nav ul.language-switcher {
+  height: auto;
+  overflow: visible;
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+header nav ul.language-switcher li {
+  display: inline-block;
+}
+
+header nav ul.language-switcher a,
+header nav ul.language-switcher span {
+  display: inline-block;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+header nav ul.language-switcher span.active {
+  text-decoration: underline;
+}
+
+header nav#top-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+div.property {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) 1fr;
+  column-gap: 1.5rem;
+  row-gap: .5rem;
+}
+
+div.property dt {
+  font-weight: bold;
+  grid-column: 1;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+div.property dd {
+  margin: 0; 
+  grid-column: 2;
+}
