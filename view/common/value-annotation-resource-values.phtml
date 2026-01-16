@@ -43,6 +43,7 @@ foreach ($values as $term => $propertyData):
             else:
             $label = $escape($propertyLabel);
             endif;
+            echo $label;
         ?>
         <?php if ($propertyTerm !== null): ?>
         <span class="field-term">(<?php echo $escape($propertyTerm); ?>)</span>

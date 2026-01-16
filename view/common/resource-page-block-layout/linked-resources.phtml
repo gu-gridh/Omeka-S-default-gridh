@@ -1,0 +1,27 @@
+<?php
+$siteId = null;
+if ($this->siteSetting('exclude_resources_not_in_site')) {
+    $siteId = $this->currentSite()->id();
+}
+?>
+<?php if ($resource->subjectValueTotalCount(null, null, $siteId)): ?>
+<?php $docs = $this->relatedAnnotatedItems($resource, [
+    'relation_property'     => 'dcterms:subject',
+    'annotation_properties' => ['bibo:pages'],
+    'resource_type'         => 'items',
+]);?> 
+ <?php if ($docs): ?>
+<dl class="linked-resources"> 
+    <dt>Title</dt>
+<?php foreach ($docs as $row):
+    $doc   = $row['related'];
+    $annotations = $row['annotations'];?>
+    <dd><?php echo $this->hyperlink($doc->displayTitle(), $doc->url());?>
+      <span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span>
+    </dd>  
+<?php endforeach; ?>
+</dl>  
+ <?php else: ?>
+  <?php echo $this->linkedResources($resource); ?>
+ <?php endif; ?>
+<?php endif; ?>
