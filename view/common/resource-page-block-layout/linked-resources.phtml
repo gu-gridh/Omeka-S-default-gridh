@@ -12,7 +12,10 @@ if ($this->siteSetting('exclude_resources_not_in_site')) {
 ]);?> 
  <?php if ($docs): ?>
 <dl class="linked-resources"> 
-    <dt>Title</dt>
+       <dt><?php echo sprintf(
+    $this->translate('"%s" is mentioned in the following documents:'),
+    $resource->displayTitle()
+    );?></dt>
 <?php foreach ($docs as $row):
     $doc   = $row['related'];
     $annotations = $row['annotations'];?>
@@ -20,7 +23,7 @@ if ($this->siteSetting('exclude_resources_not_in_site')) {
       <span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span>
     </dd>  
 <?php endforeach; ?>
-</dl>  
+</dl>    
  <?php else: ?>
   <?php echo $this->linkedResources($resource); ?>
  <?php endif; ?>
