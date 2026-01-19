@@ -23,8 +23,8 @@ if ($this->siteSetting('exclude_resources_not_in_site')) {
       <span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span>
     </dd>  
 <?php endforeach; ?>
-</dl>    
-<?php endif; ?>
+</dl>
  <?php else: ?>
-  <?php echo $this->linkedResources($resource); ?>
+    <?php echo $resource->displaySubjectValues(['siteId' => $siteId]); ?>
+ <?php endif; ?>
 <?php endif; ?>
