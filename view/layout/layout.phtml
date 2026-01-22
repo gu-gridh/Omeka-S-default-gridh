@@ -18,6 +18,7 @@ $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 
 $this->headLink()->prependStylesheet($this->assetUrl('vendor/chosen-js/chosen.css', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('js/chosen-options.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/chosen-js/chosen.jquery.js', 'Omeka'));
+$this->headScript()->appendFile($this->assetUrl('js/chosen-init.js'));
 $this->jsTranslate();
 $this->htmlElement('body')->appendAttribute('class', 'body-truncate-' . $browseBodyTruncation);
 $this->trigger('view.layout'); 
