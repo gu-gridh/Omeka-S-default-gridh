@@ -18,6 +18,16 @@ gulp.task('css', function () {
         .pipe(gulp.dest('./asset/css'));
 });
 
+gulp.task('vendor:chosen', function () {
+    return gulp.src([
+        './node_modules/chosen-js/chosen.min.css',
+        './node_modules/chosen-js/chosen.jquery.min.js'
+    ], { allowEmpty: true })
+    .pipe(gulp.dest('./asset/vendor/chosen'));
+});
+
+gulp.task('build', gulp.parallel('css', 'vendor:chosen'));
+
 gulp.task('css:watch', function () {
     gulp.watch('./asset/sass/*.scss', gulp.parallel('css'));
 });

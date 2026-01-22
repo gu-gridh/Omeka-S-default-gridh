@@ -1,4 +1,5 @@
 /vendor/
+/asset/vendor/
 /node_modules/
 .sass-cache
 .DS_Store
