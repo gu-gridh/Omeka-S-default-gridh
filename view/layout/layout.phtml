@@ -48,6 +48,16 @@ $userBar = $this->userBar();
                 <?php endif; ?>
                 </a>
             </h1>
+            <?php if ($this->themeSetting('logotitle')): ?>
+                <div class="title-container">
+                    <h2 class="site-title">
+                        <?php echo $this->themeSetting('logotitle'); ?>
+                    </h2>
+                    <h3 class="site-title">
+                        <?php echo $this->themeSetting('logosubtitle'); ?>
+                    </h3>
+                </div>
+            <?php endif; ?>
             <nav id="top-nav">
                 <button type="button" id="mobile-nav-toggle" aria-expanded="false" aria-label="<?php echo $translate('Toggle Menu'); ?>" title="<?php echo $translate('Toggle Menu'); ?>" aria-expanded="false"></button>
                 <?php
