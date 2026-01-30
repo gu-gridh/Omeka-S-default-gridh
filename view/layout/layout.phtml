@@ -50,12 +50,14 @@ $userBar = $this->userBar();
                     </a>
                 </h1>
                 <?php if ($this->themeSetting('logotitle')): ?>
-                    <h2 class="site-title">
+                    <div class="title-headers">
+                    <h2 class="subtitle">
                         <?php echo $this->themeSetting('logotitle'); ?>
                     </h2>
-                    <h3 class="site-title">
+                    <h3 class="subtitle">
                         <?php echo $this->themeSetting('logosubtitle'); ?>
                     </h3>
+                    </div>
                 <?php endif; ?>
             </div>
             <nav id="top-nav">
