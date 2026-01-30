@@ -6,7 +6,11 @@
  * @var string $type
  * @var array $options
  */
-
+$this->headLink()->appendStylesheet($this->assetUrl('css/jstree.css', 'Omeka'));
+$this->headScript()
+    ->appendFile($this->assetUrl('vendor/jstree/jstree.min.js', 'Omeka'))
+    ->appendFile($this->assetUrl('js/jstree-plugins.js', 'Omeka'))
+    ->appendFile($this->assetUrl('js/jstree-init.js'));
 ?>
 
 <div class="block-thesaurus">
