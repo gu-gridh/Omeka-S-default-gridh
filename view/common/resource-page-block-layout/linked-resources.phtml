@@ -3,15 +3,24 @@ $siteId = null;
 if ($this->siteSetting('exclude_resources_not_in_site')) {
     $siteId = $this->currentSite()->id();
 }
+$profiles = $this->setting('annotationprofiles_profiles', '[]');
+$templateProfiles = $this->setting('annotationprofiles_template_profiles', '[]');
+
+$template = $resource->resourceTemplate();
+$templateId = $template ? $template->id() : null;
+
+$profileKey = ($templateId !== null && isset($templateProfiles[$templateId])) ? $templateProfiles[$templateId] : null;
+$profile    = ($profileKey !== null && isset($profiles[$profileKey])) ? $profiles[$profileKey] : null;
+
 ?>
-<?php if ($resource->subjectValueTotalCount(null, null, $siteId)): ?>
-<?php $docs = $this->relatedAnnotatedItems($resource, [
-    'relation_property'     => 'dcterms:subject',
-    'annotation_properties' => ['bibo:pages'],
-    'resource_type'         => 'items',
-]);?> 
- <?php if ($docs): ?>
-<dl class="linked-resources"> 
+<?php if ($resource->subjectValueTotalCount(null, null, $siteId)):
+      $docs = $this->relatedAnnotatedItems($resource, [
+        'relation_property'     => $profile['relation_property'] ?? 'dcterms:subject',
+        'annotation_properties' => $profile['annotation_properties'] ?? [],
+        'resource_type'         => $profile['resource_type'] ?? 'items',
+]); 
+if ($docs): ?>
+<dl class="linked-resources">
        <dt><?php echo sprintf(
     $this->translate('"%s" is mentioned in the following documents:'),
     $resource->displayTitle()
@@ -21,7 +30,7 @@ if ($this->siteSetting('exclude_resources_not_in_site')) {
     $annotations = $row['annotations'];?>
     <dd><?php echo $this->hyperlink($doc->displayTitle(), $doc->url());?>
       <span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span>
-    </dd>  
+    </dd>
 <?php endforeach; ?>
 </dl>
  <?php else: ?>
