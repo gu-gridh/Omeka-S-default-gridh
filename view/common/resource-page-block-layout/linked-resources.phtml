@@ -1,7 +1,12 @@
 <?php
-$siteId = null;
+$options = [
+    'page' => $this->params()->fromQuery('page', 1),
+    'perPage' => 25,
+    'resourceProperty' => $this->params()->fromQuery('resource_property'),
+    'siteId' => null,
+]; 
 if ($this->siteSetting('exclude_resources_not_in_site')) {
-    $siteId = $this->currentSite()->id();
+    $options['siteId'] = $this->currentSite()->id();
 }
 $profiles = $this->setting('annotationprofiles_profiles', '[]');
 $templateProfiles = $this->setting('annotationprofiles_template_profiles', '[]');
@@ -13,7 +18,7 @@ $profileKey = ($templateId !== null && isset($templateProfiles[$templateId])) ? 
 $profile    = ($profileKey !== null && isset($profiles[$profileKey])) ? $profiles[$profileKey] : null;
 
 ?>
-<?php if ($resource->subjectValueTotalCount(null, null, $siteId)):
+<?php if ($resource->subjectValueTotalCount(null, null, $options['siteId'])):
       $docs = $this->relatedAnnotatedItems($resource, [
         'relation_property'     => $profile['relation_property'] ?? 'dcterms:subject',
         'annotation_properties' => $profile['annotation_properties'] ?? [],
@@ -21,7 +26,7 @@ $profile    = ($profileKey !== null && isset($profiles[$profileKey])) ? $profile
 ]);
 if ($docs): ?>
 <dl class="linked-resources">
-    <dt><?php if ($profile["relation_property"] == "dcterms:isPartOf"): 
+    <dt><?php if ($profile["relation_property"] == "dcterms:isPartOf"):
     echo sprintf(
     $this->translate('"%s" is part of the following documents:'),
     $resource->displayTitle());
@@ -40,6 +45,6 @@ if ($docs): ?>
 <?php endforeach; ?>
 </dl>
  <?php else: ?>
-    <?php echo $resource->displaySubjectValues(['siteId' => $siteId]); ?>
+    <?php echo $resource->displaySubjectValues($options); ?>
  <?php endif; ?>
 <?php endif; ?>
