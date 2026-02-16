@@ -28,7 +28,7 @@ if ($docs): ?>
 <dl class="linked-resources">
     <dt><?php if ($profile["relation_property"] == "dcterms:isPartOf"):
     echo sprintf(
-    $this->translate('"%s" is part of the following documents:'),
+    $this->translate('"%s" has parts:'),
     $resource->displayTitle());
     else:
     echo sprintf(
