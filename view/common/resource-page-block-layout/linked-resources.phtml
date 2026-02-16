@@ -18,18 +18,24 @@ $profile    = ($profileKey !== null && isset($profiles[$profileKey])) ? $profile
         'relation_property'     => $profile['relation_property'] ?? 'dcterms:subject',
         'annotation_properties' => $profile['annotation_properties'] ?? [],
         'resource_type'         => $profile['resource_type'] ?? 'items',
-]); 
+]);
 if ($docs): ?>
 <dl class="linked-resources">
-       <dt><?php echo sprintf(
+    <dt><?php if ($profile["relation_property"] == "dcterms:isPartOf"): 
+    echo sprintf(
+    $this->translate('"%s" is part of the following documents:'),
+    $resource->displayTitle());
+    else:
+    echo sprintf(
     $this->translate('"%s" is mentioned in the following documents:'),
     $resource->displayTitle()
-    );?></dt>
+    );
+    endif; ?></dt>
 <?php foreach ($docs as $row):
     $doc   = $row['related'];
     $annotations = $row['annotations'];?>
     <dd><?php echo $this->hyperlink($doc->displayTitle(), $doc->url());?>
-      <span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span>
+      <?php if ($annotations): ?><span>(p. <?php echo implode(",", $annotations["pages"]);?>)</span><?php endif; ?>
     </dd>
 <?php endforeach; ?>
 </dl>
