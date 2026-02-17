@@ -14,9 +14,11 @@ if (count($locales) <= 1) {
 }
 
 $currentLocale = $this->siteSetting('locale') ?: $defaultLocale;
+$escapeAttr = $this->plugin('escapeHtmlAttr');
+$escapeHtml = $this->plugin('escapeHtml');
 ?>
 
-<ul class="language-switcher locale-<?= $displayLocale ?>">
+<ul class="language-switcher locale-<?= $escapeAttr($displayLocale) ?>">
     <?php if ($displayLocale === 'flag'): ?>
 
     <?php $localeToCountry = $this->plugin('localeToCountry'); ?>
@@ -24,9 +26,9 @@ $currentLocale = $this->siteSetting('locale') ?: $defaultLocale;
         <?php $country = $localeToCountry($locale['locale']); ?>
         <li>
             <?php if ($currentLocale == $locale['locale']): ?>
-                <span class="active flag-icon flag-icon-<?= strtolower($country) ?>" title="<?= $locale['locale_label'] ?>"></span>
+                <span class="active flag-icon flag-icon-<?= $escapeAttr(strtolower($country)) ?>" title="<?= $escapeAttr($locale['locale_label']) ?>"></span>
             <?php else: ?>
-                <a href="<?= $locale['url'] ?>" title="<?= $locale['locale_label'] ?>"><span class="flag-icon flag-icon-<?= strtolower($country) ?>"></span></a>
+                <a href="<?= $escapeAttr($locale['url']) ?>" title="<?= $escapeAttr($locale['locale_label']) ?>"><span class="flag-icon flag-icon-<?= $escapeAttr(strtolower($country)) ?>"></span></a>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>
@@ -36,9 +38,9 @@ $currentLocale = $this->siteSetting('locale') ?: $defaultLocale;
     <?php foreach ($locales as $locale): ?>
         <li>
             <?php if ($currentLocale == $locale['locale']): ?>
-                <span class="active" title="<?= $locale['locale_label'] ?>"><?= rtrim(substr($locale['locale'], 0, 3), '_-') ?></span>
+                <span class="active" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $escapeHtml(rtrim(substr($locale['locale'], 0, 3), '_-')) ?></span>
             <?php else: ?>
-                <a href="<?= $locale['url'] ?>" title="<?= $locale['locale_label'] ?>"><?= rtrim(substr($locale['locale'], 0, 3), '_-') ?></a>
+                <a href="<?= $escapeAttr($locale['url']) ?>" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $escapeHtml(rtrim(substr($locale['locale'], 0, 3), '_-')) ?></a>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>
