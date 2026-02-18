@@ -60,7 +60,7 @@ $pagecount = 1;
 $caption = sprintf(
     $this->translate('%s with "%s: %s"'),
     $this->translate($labelMap[$resourceType]),
-    $values[0]['property_alternate_label'] ?? $this->translate($values[0]['property_label']),
+    $this->translate($values[0]['property_alternate_label']) ?? $this->translate($values[0]['property_label']),
     $objectResource->displayTitle()
 );
 ?>
