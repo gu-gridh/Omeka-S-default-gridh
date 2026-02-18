@@ -5,6 +5,7 @@ use Laminas\Form\Element\Select;
 $pagination = $this->pagination(null, $totalCount, $page, $perPage);
 $fragment = 'resources-linked';
 $pagination->setFragment($fragment);
+$pagecount = 0;
 
 // Set up locale.
 $valueLang = null;
@@ -54,7 +55,8 @@ $resourcePropertiesSelect->setValueOptions($valueOptions);
 <div id="linked-resources">
 
 <?php foreach ($subjectValues as $values): ?>
-<?php if ($values[0]['property_label'] != 'has narrower' && $values[0]['property_label'] != 'has top concept' && $values[0]['property_label'] != 'has broader'):
+<?php if ($values[0]['property_label'] != 'has narrower' && $values[0]['property_label'] != 'has top concept' && $values[0]['property_label'] != 'has broader' && $values[0]['property_label'] != 'is in scheme'):
+$pagecount = 1;
 $caption = sprintf(
     $this->translate('%s with "%s: %s"'),
     $this->translate($labelMap[$resourceType]),
@@ -72,7 +74,5 @@ $caption = sprintf(
 </ul>
 <?php endif; ?>
 <?php endforeach; ?>
-
-<?php echo ($totalCount > $perPage) ? '<div class="linked-footer">' . $pagination . '</div>' : ''; ?>
-
+<?php echo ($totalCount > $perPage && $pagecount) ? '<div class="linked-footer">' . $pagination . '</div>' : ''; ?>
 </div>
