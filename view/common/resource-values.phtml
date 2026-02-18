@@ -25,7 +25,7 @@ foreach ($values as $term => $propertyData):
         continue;
     }
     $property = $propertyData['property'];
-    $propertyLabel = $propertyData['alternate_label'] ?: $translate($property->label());
+    $propertyLabel = $translate($propertyData['alternate_label'] ?: $property->label());
     if ('term' === $labelInfo) {
         $propertyTerm = $property->term();
     } elseif ('vocab' === $labelInfo) {
