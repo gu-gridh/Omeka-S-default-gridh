@@ -33,7 +33,7 @@ foreach ($values as $term => $propertyData):
     } else {
         $propertyTerm = null;
     }
-?>
+    if ($property->label() !== "is in scheme"): ?>
     <div class="property">
         <dt>
         <?php echo $escape($propertyLabel); ?>
@@ -73,6 +73,7 @@ foreach ($values as $term => $propertyData):
         </dd>
         <?php endforeach; ?>
     </div>
+    <?php endif ?>
 <?php endforeach; ?>
 </dl>
 <?php endif; ?>
