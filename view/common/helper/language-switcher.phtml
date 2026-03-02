@@ -36,11 +36,12 @@ $escapeHtml = $this->plugin('escapeHtml');
     <?php else: ?>
 
     <?php foreach ($locales as $locale): ?>
+        <?php $loc_label = $escapeHtml(rtrim(ucfirst(strtok($locale['locale_label'], '(')))); ?>
         <li>
             <?php if ($currentLocale == $locale['locale']): ?>
-                <span class="active" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $escapeHtml(rtrim(substr($locale['locale'], 0, 3), '_-')) ?></span>
+                <span class="active" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $loc_label ?></span>
             <?php else: ?>
-                <a href="<?= $escapeAttr($locale['url']) ?>" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $escapeHtml(rtrim(substr($locale['locale'], 0, 3), '_-')) ?></a>
+                <a href="<?= $escapeAttr($locale['url']) ?>" title="<?= $escapeAttr($locale['locale_label']) ?>"><?= $loc_label ?></a>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>
