@@ -40,7 +40,7 @@ $userBar = $this->userBar();
         <?php echo $userBar; ?>
         <header>            
             <div class="title-container">
-                <h1 class="site-title">
+                <div class="site-title">
                     <a href="<?php echo $site->url(); ?>">
                     <?php if ($this->themeSetting('logo')): ?>
                         <img src="<?php echo $this->themeSettingAssetUrl('logo'); ?>" alt="<?php echo $escape($siteTitle); ?>" />
@@ -48,15 +48,15 @@ $userBar = $this->userBar();
                         <?php echo $escape($siteTitle); ?>
                     <?php endif; ?>
                     </a>
-                </h1>
+                </div>
                 <?php if ($this->themeSetting('logotitle')): ?>
                     <div class="title-headers">
-                    <h2 class="subtitle">
+                    <div class="subtitle">
                         <?php echo $this->themeSetting('logotitle'); ?>
-                    </h2>
-                    <h3 class="subtitle">
+                    </div>
+                    <div class="subtitle">
                         <?php echo $this->themeSetting('logosubtitle'); ?>
-                    </h3>
+                    </div>
                     </div>
                 <?php endif; ?>
             </div>
