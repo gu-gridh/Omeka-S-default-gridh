@@ -19,6 +19,7 @@ $this->headLink()->prependStylesheet($this->assetUrl('vendor/chosen-js/chosen.cs
 $this->headScript()->prependFile($this->assetUrl('js/chosen-options.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/chosen-js/chosen.jquery.js', 'Omeka'));
 $this->headScript()->appendFile($this->assetUrl('js/chosen-init.js'));
+$this->headScript()->appendFile($this->assetUrl('js/advanced-search.js')); // advanced search fixes
 $this->jsTranslate();
 $this->htmlElement('body')->appendAttribute('class', 'body-truncate-' . $browseBodyTruncation);
 $this->trigger('view.layout'); 
